@@ -27,13 +27,11 @@ def matrix_to_html(matrix):
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-
+    # CORREÇÃO: Passando os parâmetros de forma explícita
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
-            "result": None
-        }
+        request=request,
+        name="index.html",
+        context={"result": None}
     )
 
 
@@ -82,10 +80,9 @@ async def calculate(
         "multiplication": matrix_to_html(multiplication) if multiplication is not None else "Não disponível"
     }
 
+    # CORREÇÃO: Passando os parâmetros de forma explícita
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
-            "result": result
-        }
+        request=request,
+        name="index.html",
+        context={"result": result}
     )
